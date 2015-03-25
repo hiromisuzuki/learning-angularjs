@@ -1,22 +1,29 @@
 <!doctype html>
-<html lang="ja" ng-app="phonecatApp">
+<html lang="ja" ng-app="phonecatApp" ng-controller="PhoneListCtrl">
 <head>
   <meta charset="utf-8">
-  <title>でんわだよ</title>
+  <title ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <script src="bower_components/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl">
-	<p>{{property}}</p>
-	<p>電話は全部で {{phones.length}} つあるよ</p>
-	<ul>
-	<li ng-repeat="phone in phones"><span>{{phone.name}}</span><p>{{phone.snippet}}</p></li>
-	</ul> 
-	<table>
-	<tr><th>行番号をng-repeatで</th></tr>
-	<tr ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]"><td>{{i+1}}</td></tr>
-	</table> 
+<body>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-2">
+	<!-- sidebar -->
+	Search: <input ng-model="query" />
+	</div>
+	<div class="col-md-10">
+	<!-- body -->
+	<ul class="phones">
+	<li ng-repeat="phone in phones | filter:query">
+	{{phone.name}}<p>{{phone.snippet}}</p>
+	</li>
+	</ul>
+	</div>
+	</div>	
+</div>
 </body>
 </html>
